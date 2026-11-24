@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | Kesar &amp; Kadak Modern-Indian Cafe</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <a href="index.html" class="brand-logo">Kesar <span>&amp;</span> Kadak</a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#menu">Menu</a>
+      <a href="index.html#booking">Pre-Book Table</a>
+      <a href="index.html#reviews">Reviews</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+    <div class="nav-actions" id="authContainer">
+      <button class="btn btn-outline" onclick="openLoginModal()">Member Login</button>
+    </div>
+  </header>
+
+  <!-- Page Banner -->
+  <section class="page-banner">
+    <span>Get In Touch</span>
+    <h1>Visit Our Courtyard</h1>
+    <p>Have a question about private group bookings, catering, or wholesale spice blends? Drop us a line below.</p>
+  </section>
+
+  <!-- Contact Details & Form -->
+  <section class="section">
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-item">
+          <h4>Cafe Location</h4>
+          <p>14 Heritage Courtyard, Road No. 36<br />Jubilee Hills, Hyderabad 500033</p>
+        </div>
+        <div class="contact-item">
+          <h4>Opening Hours</h4>
+          <p>Monday – Friday: 7:30 AM – 10:30 PM<br />Saturday – Sunday: 7:30 AM – 11:30 PM</p>
+        </div>
+        <div class="contact-item">
+          <h4>Direct Reservations &amp; Events</h4>
+          <p>Phone: +91 40 2355 8899<br />Email: hello@kesarandkadak.in</p>
+        </div>
+        <a href="index.html#booking" class="btn btn-secondary" style="width: 100%; margin-top: 0.5rem;">Pre-Book a Table Online</a>
+      </div>
+
+      <div class="contact-card">
+        <h3 style="font-size: 2rem; margin-bottom: 0.4rem;">Send a Message</h3>
+        <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.5rem;">Our hospitality manager replies within 2 business hours.</p>
+        <form id="contactForm" onsubmit="handleContactSubmit(event)">
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label for="cName">Your Name</label>
+            <input type="text" id="cName" placeholder="Kabir Mehta" required />
+          </div>
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label for="cEmail">Email Address</label>
+            <input type="email" id="cEmail" placeholder="kabir@example.com" required />
+          </div>
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label for="cSubject">Inquiry Type</label>
+            <select id="cSubject">
+              <option value="General Question">General Question</option>
+              <option value="Private Event / Courtyard Booking">Private Event / Courtyard Booking</option>
+              <option value="Catering & Gifting">Catering &amp; Festive Hampers</option>
+              <option value="Feedback">Guest Feedback</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom: 1.25rem;">
+            <label for="cMessage">Message</label>
+            <textarea id="cMessage" rows="4" placeholder="How can we make your visit memorable?" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Kesar <span>&amp;</span> Kadak</div>
+        <p>Celebrating Indian botanicals, single-estate coffees, and warm hospitality in a contemporary setting.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">Our Story</a></li>
+          <li><a href="index.html#booking">Pre-Book a Table</a></li>
+          <li><a href="contact.html">Contact &amp; Hours</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visit Us</h4>
+        <ul>
+          <li>14 Heritage Courtyard, Jubilee Hills</li>
+          <li>Open Daily: 7:30 AM – 11:00 PM</li>
+          <li>hello@kesarandkadak.in</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Kesar &amp; Kadak Modern-Indian Cafe. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Login Modal -->
+  <div class="modal-overlay" id="loginModal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeLoginModal()">&times;</button>
+      <h3>Welcome Back</h3>
+      <p>Sign in to auto-fill table reservations and earn Chai Club rewards.</p>
+      <form onsubmit="handleLogin(event)">
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label for="loginName">Display Name</label>
+          <input type="text" id="loginName" placeholder="e.g., Rohan Verma" required />
+        </div>
+        <div class="form-group" style="margin-bottom: 1.25rem;">
+          <label for="loginEmail">Email Address</label>
+          <input type="email" id="loginEmail" placeholder="rohan@example.com" required />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      document.getElementById('contactForm').reset();
+      showToast("Message received! Our team will reach out shortly.");
+    }
+
+    function openLoginModal() { document.getElementById('loginModal').classList.add('open'); }
+    function closeLoginModal() { document.getElementById('loginModal').classList.remove('open'); }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const name = document.getElementById('loginName').value.trim();
+      const email = document.getElementById('loginEmail').value.trim();
+      localStorage.setItem('kk_user', JSON.stringify({ name, email }));
+      closeLoginModal();
+      updateAuthUI();
+      showToast(`Namaste, ${name}! You are now signed in.`);
+    }
+
+    function logoutUser() {
+      localStorage.removeItem('kk_user');
+      updateAuthUI();
+      showToast("You have been logged out.");
+    }
+
+    function updateAuthUI() {
+      const container = document.getElementById('authContainer');
+      const user = JSON.parse(localStorage.getItem('kk_user'));
+      if (user) {
+        container.innerHTML = `
+          <span class="user-badge">✦ ${user.name}</span>
+          <button class="btn btn-outline" style="padding: 0.45rem 0.9rem; font-size: 0.82rem;" onclick="logoutUser()">Logout</button>
+        `;
+        const cName = document.getElementById('cName');
+        const cEmail = document.getElementById('cEmail');
+        if (cName && !cName.value) cName.value = user.name;
+        if (cEmail && !cEmail.value) cEmail.value = user.email;
+      } else {
+        container.innerHTML = `<button class="btn btn-outline" onclick="openLoginModal()">Member Login</button>`;
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3500);
+    }
+
+    document.addEventListener('DOMContentLoaded', updateAuthUI);
+  </script>
+</body>
+</html>

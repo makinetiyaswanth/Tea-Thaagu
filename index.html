@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kesar &amp; Kadak | Modern-Indian Cafe &amp; Roastery</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <a href="index.html" class="brand-logo">Kesar <span>&amp;</span> Kadak</a>
+    <nav class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="#menu">Menu</a>
+      <a href="#booking">Pre-Book Table</a>
+      <a href="#reviews">Reviews</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav-actions" id="authContainer">
+      <button class="btn btn-outline" onclick="openLoginModal()">Member Login</button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div>
+      <span class="hero-tag">Artisanal Chai • Single-Origin Kaapi • Small Plates</span>
+      <h1>Where Heirloom Spices Meet Third-Wave Craft.</h1>
+      <p>Experience a contemporary Indian cafe culture. From single-estate Chikmagalur pour-overs and saffron-infused cortados to crispy sourdough masala toasts.</p>
+      <div class="hero-buttons">
+        <a href="#booking" class="btn btn-primary">Pre-Book a Table</a>
+        <a href="#menu" class="btn btn-outline">Explore Menu</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-img-card">
+        <img src="https://images.unsplash.com/photo-1561336313-0bd5e0b27ec8?auto=format&fit=crop&w=900&q=80" alt="Spiced Masala Chai and Indian Pastries" />
+      </div>
+      <div class="floating-badge">
+        <strong>4.9 ★ Guest Rating</strong>
+        <span>Open Daily • 7:30 AM – 11:00 PM</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu Section -->
+  <section class="section" id="menu">
+    <div class="section-header">
+      <span>Curated Flavors</span>
+      <h2>Signature Cafe Menu</h2>
+      <p>Crafted fresh to order using organic jaggery, stone-ground spices, and small-batch roasted beans.</p>
+    </div>
+
+    <div class="menu-tabs">
+      <button class="tab-btn active" onclick="filterMenu('all', this)">All Offerings</button>
+      <button class="tab-btn" onclick="filterMenu('chai', this)">Chai &amp; Kaapi</button>
+      <button class="tab-btn" onclick="filterMenu('plates', this)">Small Plates</button>
+      <button class="tab-btn" onclick="filterMenu('sweets', this)">Mithai Bakery</button>
+    </div>
+
+    <div class="menu-grid" id="menuGrid">
+      <!-- Populated via JS -->
+    </div>
+  </section>
+
+  <!-- Table Pre-Booking Section -->
+  <section class="section section-warm" id="booking">
+    <div class="inner">
+      <div class="booking-wrapper">
+        <div class="booking-info">
+          <span class="hero-tag">Skip The Queue</span>
+          <h3>Pre-Book Your Table</h3>
+          <p>Reserve a cozy window booth, courtyard table, or quiet work corner ahead of your visit. Logged-in members earn complimentary spiced cashews on arrival.</p>
+          <ul class="booking-perks">
+            <li>Instant digital table confirmation</li>
+            <li>15-minute grace window for arrivals</li>
+            <li>Custom seating zones (Courtyard, Indoor Lounge, Work Pod)</li>
+            <li>Complimentary welcome drink for groups of 4+</li>
+          </ul>
+        </div>
+
+        <form id="bookingForm" onsubmit="handleBooking(event)">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="bookName">Full Name</label>
+              <input type="text" id="bookName" placeholder="Aarav Sharma" required />
+            </div>
+            <div class="form-group">
+              <label for="bookPhone">Phone Number</label>
+              <input type="tel" id="bookPhone" placeholder="+91 98765 43210" required />
+            </div>
+            <div class="form-group">
+              <label for="bookDate">Date</label>
+              <input type="date" id="bookDate" required />
+            </div>
+            <div class="form-group">
+              <label for="bookTime">Time Slot</label>
+              <select id="bookTime" required>
+                <option value="09:00 AM">09:00 AM (Morning Brew)</option>
+                <option value="11:30 AM">11:30 AM (Brunch)</option>
+                <option value="02:00 PM">02:00 PM (Afternoon)</option>
+                <option value="05:30 PM" selected>05:30 PM (Evening Chai)</option>
+                <option value="08:00 PM">08:00 PM (Dinner &amp; Lounge)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="bookGuests">Number of Guests</label>
+              <select id="bookGuests" required>
+                <option value="1 Guest">1 Guest</option>
+                <option value="2 Guests" selected>2 Guests</option>
+                <option value="4 Guests">4 Guests</option>
+                <option value="6 Guests">6 Guests</option>
+                <option value="8+ Guests">8+ Guests</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="bookZone">Seating Preference</label>
+              <select id="bookZone">
+                <option value="Indoor Lounge">Indoor Lounge</option>
+                <option value="Terracotta Courtyard">Terracotta Courtyard</option>
+                <option value="Quiet Work Corner">Quiet Work Corner</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">Confirm Table Reservation</button>
+            </div>
+          </div>
+          <div class="booking-confirmation" id="bookingConfirmation"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Customer Reviews Section -->
+  <section class="section" id="reviews">
+    <div class="section-header">
+      <span>Community Love</span>
+      <h2>Guest Reviews &amp; Stories</h2>
+      <p>Read what our regulars say or share your own experience from your latest visit.</p>
+    </div>
+
+    <div class="reviews-layout">
+      <div class="reviews-grid" id="reviewsList">
+        <!-- Populated via JS -->
+      </div>
+
+      <div class="review-form-box">
+        <h3>Write a Review</h3>
+        <p>Tried our Rose Pistachio Tres Leches or Kadak Adrak Chai? Let us know!</p>
+        <form id="reviewForm" onsubmit="handleReviewSubmit(event)">
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label for="revName">Your Name</label>
+            <input type="text" id="revName" placeholder="Priya Nair" required />
+          </div>
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label for="revRating">Rating</label>
+            <select id="revRating">
+              <option value="5">★★★★★ (5/5 - Exceptional)</option>
+              <option value="4">★★★★☆ (4/5 - Great)</option>
+              <option value="3">★★★☆☆ (3/5 - Good)</option>
+              <option value="2">★★☆☆☆ (2/5 - Fair)</option>
+              <option value="1">★☆☆☆☆ (1/5 - Poor)</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom: 1.25rem;">
+            <label for="revComment">Your Review</label>
+            <textarea id="revComment" rows="4" placeholder="Tell us about the ambiance, drinks, and service..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-secondary" style="width: 100%;">Post Review</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Kesar <span>&amp;</span> Kadak</div>
+        <p>Celebrating Indian botanicals, single-estate coffees, and warm hospitality in a contemporary setting.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">Our Story</a></li>
+          <li><a href="#booking">Pre-Book a Table</a></li>
+          <li><a href="contact.html">Contact &amp; Hours</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visit Us</h4>
+        <ul>
+          <li>14 Heritage Courtyard, Jubilee Hills</li>
+          <li>Open Daily: 7:30 AM – 11:00 PM</li>
+          <li>hello@kesarandkadak.in</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Kesar &amp; Kadak Modern-Indian Cafe. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Login Modal -->
+  <div class="modal-overlay" id="loginModal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeLoginModal()">&times;</button>
+      <h3>Welcome Back</h3>
+      <p>Sign in to auto-fill table reservations and earn Chai Club rewards.</p>
+      <form onsubmit="handleLogin(event)">
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label for="loginName">Display Name</label>
+          <input type="text" id="loginName" placeholder="e.g., Rohan Verma" required />
+        </div>
+        <div class="form-group" style="margin-bottom: 1.25rem;">
+          <label for="loginEmail">Email Address</label>
+          <input type="email" id="loginEmail" placeholder="rohan@example.com" required />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // Menu Data
+    const menuItems = [
+      { name: "Saffron Cardamom Cortado", price: "₹240", category: "chai", desc: "Double-shot Chikmagalur espresso layered with Kashmiri kesar-infused steamed milk.", tag: "House Signature" },
+      { name: "Kulhad Kadak Adrak Chai", price: "₹160", category: "chai", desc: "Assam orthodox tea slow-brewed with crushed ginger, green cardamom, and organic jaggery.", tag: "Bestseller" },
+      { name: "Filter Kaapi Tonic", price: "₹260", category: "chai", desc: "Chilled South Indian decoction poured over artisanal tonic water and a twist of Nagpur orange.", tag: "Refreshing" },
+      { name: "Truffle Gunpowder Sourdough", price: "₹340", category: "plates", desc: "Whipped paneer, curry leaf pesto, and roasted podi butter on charred country sourdough.", tag: "Vegetarian" },
+      { name: "Mini Ghee Roast Tacos", price: "₹390", category: "plates", desc: "Crispy ragi shells filled with Mangalorean spiced jackfruit, pickled onions, and coconut crema.", tag: "Chef's Pick" },
+      { name: "Rose & Pistachio Tres Leches", price: "₹320", category: "sweets", desc: "Cardamom sponge soaked in saffron-rose milk, topped with roasted Iranian pistachios.", tag: "Must Try" }
+    ];
+
+    // Default Reviews
+    const defaultReviews = [
+      { name: "Ananya Desai", rating: 5, date: "2 days ago", comment: "The Saffron Cardamom Cortado is unmatched! Love the terracotta interiors and how easy it was to pre-book a table for Sunday brunch." },
+      { name: "Vikramaditya Rao", rating: 5, date: "1 week ago", comment: "Finally a modern Indian cafe that respects authentic spices without making everything overly sweet. The Truffle Gunpowder toast is a 10/10." },
+      { name: "Meera Krishnan", rating: 4, date: "2 weeks ago", comment: "Super peaceful courtyard seating for working remotely in the morning. Great filter kaapi and warm staff." }
+    ];
+
+    // Render Menu
+    function renderMenu(filter = 'all') {
+      const grid = document.getElementById('menuGrid');
+      const filtered = filter === 'all' ? menuItems : menuItems.filter(item => item.category === filter);
+      grid.innerHTML = filtered.map(item => `
+        <div class="menu-card">
+          <div>
+            <div class="menu-card-top">
+              <h3>${item.name}</h3>
+              <span class="menu-price">${item.price}</span>
+            </div>
+            <p>${item.desc}</p>
+          </div>
+          <span class="menu-tag">${item.tag}</span>
+        </div>
+      `).join('');
+    }
+
+    function filterMenu(category, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderMenu(category);
+    }
+
+    // Render Reviews
+    function getStoredReviews() {
+      const saved = localStorage.getItem('kk_reviews');
+      return saved ? JSON.parse(saved) : defaultReviews;
+    }
+
+    function renderReviews() {
+      const list = document.getElementById('reviewsList');
+      const reviews = getStoredReviews();
+      list.innerHTML = reviews.map(rev => {
+        const stars = '★'.repeat(rev.rating) + '☆'.repeat(5 - rev.rating);
+        return `
+          <div class="review-card">
+            <div class="review-header">
+              <span class="reviewer-name">${rev.name}</span>
+              <span class="review-date">${rev.date}</span>
+            </div>
+            <div class="review-stars">${stars}</div>
+            <p class="review-text">${rev.comment}</p>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function handleReviewSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('revName').value.trim();
+      const rating = parseInt(document.getElementById('revRating').value);
+      const comment = document.getElementById('revComment').value.trim();
+
+      const reviews = getStoredReviews();
+      reviews.unshift({ name, rating, date: "Just now", comment });
+      localStorage.setItem('kk_reviews', JSON.stringify(reviews));
+
+      renderReviews();
+      document.getElementById('reviewForm').reset();
+      prefillUserForms();
+      showToast("Thank you! Your review has been published.");
+    }
+
+    // Table Pre-Booking
+    function handleBooking(e) {
+      e.preventDefault();
+      const name = document.getElementById('bookName').value;
+      const date = document.getElementById('bookDate').value;
+      const time = document.getElementById('bookTime').value;
+      const guests = document.getElementById('bookGuests').value;
+      const zone = document.getElementById('bookZone').value;
+
+      const box = document.getElementById('bookingConfirmation');
+      box.style.display = 'block';
+      box.innerHTML = `<strong>Table Reserved!</strong> Namaste ${name}, your table for <strong>${guests}</strong> in the <strong>${zone}</strong> is confirmed for <strong>${date} at ${time}</strong>.`;
+      showToast("Table pre-booking confirmed!");
+    }
+
+    // Authentication Logic
+    function openLoginModal() {
+      document.getElementById('loginModal').classList.add('open');
+    }
+
+    function closeLoginModal() {
+      document.getElementById('loginModal').classList.remove('open');
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const name = document.getElementById('loginName').value.trim();
+      const email = document.getElementById('loginEmail').value.trim();
+      localStorage.setItem('kk_user', JSON.stringify({ name, email }));
+      closeLoginModal();
+      updateAuthUI();
+      showToast(`Namaste, ${name}! You are now signed in.`);
+    }
+
+    function logoutUser() {
+      localStorage.removeItem('kk_user');
+      updateAuthUI();
+      showToast("You have been logged out.");
+    }
+
+    function updateAuthUI() {
+      const container = document.getElementById('authContainer');
+      const user = JSON.parse(localStorage.getItem('kk_user'));
+      if (user) {
+        container.innerHTML = `
+          <span class="user-badge">✦ ${user.name}</span>
+          <button class="btn btn-outline" style="padding: 0.45rem 0.9rem; font-size: 0.82rem;" onclick="logoutUser()">Logout</button>
+        `;
+      } else {
+        container.innerHTML = `<button class="btn btn-outline" onclick="openLoginModal()">Member Login</button>`;
+      }
+      prefillUserForms();
+    }
+
+    function prefillUserForms() {
+      const user = JSON.parse(localStorage.getItem('kk_user'));
+      if (user) {
+        const bookName = document.getElementById('bookName');
+        const revName = document.getElementById('revName');
+        if (bookName && !bookName.value) bookName.value = user.name;
+        if (revName && !revName.value) revName.value = user.name;
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3500);
+    }
+
+    // Set default date to today & initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      const dateInput = document.getElementById('bookDate');
+      if (dateInput) dateInput.valueAsDate = new Date();
+      renderMenu();
+      renderReviews();
+      updateAuthUI();
+    });
+  </script>
+</body>
+</html>
